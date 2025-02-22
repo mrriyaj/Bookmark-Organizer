@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmark Organizer</title>
+    <title>Advanced Bookmark Organizer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Bookmark Organizer</h2>
-    <input type="text" id="searchBookmarks" placeholder="Search bookmarks...">
-    <button id="addBookmark">Add Current Page</button>
-    
-    <h3>Categories</h3>
-    <ul id="categories"></ul>
+    <header>
+        <h2>📌 Bookmark Organizer</h2>
+        <input type="text" id="searchBookmarks" placeholder="🔍 Search bookmarks...">
+    </header>
 
-    <h3>Bookmarks</h3>
-    <ul id="bookmarkList"></ul>
+    <div class="button-container">
+        <button id="addBookmark" class="btn-primary">➕ Add Current Page</button>
+        <button id="openOptions" class="btn-secondary">⚙️ Settings</button>
+    </div>
+
+    <section>
+        <h3>📂 Categories</h3>
+        <ul id="categories" class="sortable-list"></ul>
+    </section>
+
+    <section>
+        <h3>🔖 Bookmarks</h3>
+        <ul id="bookmarkList" class="sortable-list"></ul>
+    </section>
+
+    <footer>
+        <button id="toggleView" class="btn-toggle">🌗 Toggle View</button>
+        <p>📅 Last Sync: <span id="lastSync">Not Synced</span></p>
+    </footer>
 
     <script src="popup.js"></script>
 </body>

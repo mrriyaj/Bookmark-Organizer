@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Bookmark Organizer",
-  "version": "1.0",
-  "description": "Organize your bookmarks with categories, tags, and reminders!",
+  "name": "Advanced Bookmark Organizer",
+  "version": "2.0",
+  "description": "A powerful bookmark manager with categories, tags, reminders, and syncing.",
   "permissions": ["bookmarks", "storage", "tabs", "contextMenus", "alarms"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
     }
   },
   "background": {
