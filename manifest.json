@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Advanced Bookmark Organizer",
-  "version": "1.6",
+  "version": "2.0",
+  "author": "Mr Riyaj",
   "description": "A powerful bookmark manager with categories, tags, reminders, and syncing.",
   "permissions": ["bookmarks", "storage", "tabs", "contextMenus", "alarms"],
   "action": {

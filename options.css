@@ -14,7 +14,6 @@ body {
     background: #f8f9fa;
     color: #333;
     transition: background 0.3s ease, color 0.3s ease;
-    overflow: hidden; /* Prevent body scroll */
 }
 
 /* Dark Mode */
@@ -33,13 +32,13 @@ body.dark-mode {
 
 /* Sidebar */
 .sidebar {
-    width: 260px;
-    padding: 20px;
+    width: 280px; /* Increased width for better spacing */
+    padding: 25px; /* More padding */
     background: white;
     border-right: 2px solid #ddd;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     height: 100%;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -48,6 +47,23 @@ body.dark-mode {
 
 body.dark-mode .sidebar {
     background: #2c2c2c;
+}
+
+/* Settings Section */
+.settings-section {
+    margin-bottom: 30px;
+}
+
+.settings-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
 /* Main Content */
@@ -59,80 +75,56 @@ body.dark-mode .sidebar {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #bbb #eee;
+    padding-bottom: 50px; /* ⬇️ Added Extra Bottom Padding */
 }
 
 body.dark-mode .bookmarks-panel {
     background: #262626;
 }
 
-/* Top Bar */
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
-/* Search Bar */
-#searchBookmarks {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 15px;
+/* 📂 Folder Subheading */
+.folder-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: #f1f1f1;
+  border-left: 4px solid #007bff;
+  border-radius: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode #searchBookmarks {
-    background: #333;
-    border: 1px solid #555;
-    color: #fff;
+body.dark-mode .folder-name {
+  background: #2c2c2c;
+  color: #f9f9f9;
+  border-left: 4px solid #ff914d;
 }
 
-/* Buttons */
-button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-.btn-primary {
-    background: #28a745;
-    color: white;
-}
-
-.btn-secondary {
-    background: #ff6b6b;
-    color: white;
-}
-
-.btn-save {
-    background: #3a86ff;
-    color: white;
-}
-
-/* Categories & Bookmarks */
-h3 {
-    margin: 15px 0;
-    font-size: 18px;
-}
-
-/* Folder Styles - Shows First */
-.folder {
+.folder-heading {
+    font-size: 16px;
     font-weight: bold;
-    background: #f4e8c1;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 5px;
+    color: #444;
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd;
+    margin-top: 20px;
 }
 
-/* Bookmark Styles */
+body.dark-mode .folder-heading {
+    color: #f9f9f9;
+    border-bottom: 2px solid #555;
+}
+
+/* Bookmark Items */
 .bookmark-item {
     display: flex;
     align-items: center;
@@ -143,13 +135,24 @@ h3 {
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     transition: background 0.2s ease, transform 0.1s ease;
+    cursor: grab;
 }
 
 body.dark-mode .bookmark-item {
     background: #424242;
 }
 
-/* Bookmark Title - Single Line */
+.folder-drop-zone {
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: border 0.3s ease;
+    padding-bottom: 10px;
+}
+
+/* Bookmark Title */
 .bookmark-text {
     flex-grow: 1;
     overflow: hidden;
@@ -165,37 +168,84 @@ body.dark-mode .bookmark-item {
     margin-right: 10px;
 }
 
-/* Bookmark Actions */
+/* Actions (Buttons for Each Bookmark) */
 .bookmark-item .actions {
     display: flex;
     gap: 8px;
 }
 
-.bookmark-item button {
-    background: none;
+/* Buttons */
+button {
+    padding: 6px 12px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
-    padding: 5px;
+    font-size: 14px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Specific Button Styles */
+.view-btn {
+    background: #007bff;
+    color: white;
 }
 
 .pin-btn {
-    color: #ffbf00;
+    background: #ffbf00;
+    color: black;
 }
 
-.pin-btn:hover {
-    transform: scale(1.2);
+.unpin-btn {
+    background: #ff914d;
+    color: white;
 }
 
 .delete-btn {
-    color: red;
+    background: #ff6b6b;
+    color: white;
 }
 
-.delete-btn:hover {
-    transform: scale(1.2);
+/* 🔍 Search Bar */
+#searchBookmarks {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background: #fff;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+    outline: none;
 }
 
-/* Footer (Fixed at Bottom) */
+#searchBookmarks::placeholder {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Focus Effect */
+#searchBookmarks:focus {
+    border-color: #007bff;
+    box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Dark Mode Styling */
+body.dark-mode #searchBookmarks {
+    background: #333;
+    border: 2px solid #555;
+    color: #fff;
+}
+
+body.dark-mode #searchBookmarks::placeholder {
+    color: #bbb;
+}
+
+/* Footer */
 footer {
     background: #333;
     color: white;
@@ -226,5 +276,10 @@ footer a {
 
     .bookmarks-panel {
         padding: 15px;
+    }
+
+    .folder-heading {
+        font-size: 14px;
+        padding: 8px 0;
     }
 }

@@ -9,7 +9,7 @@
 <body>
     <header>
         <h2>📌 Bookmark Organizer</h2>
-        <input type="text" id="searchBookmarks" placeholder="🔍 Search...">
+        <input type="text" id="searchBookmarks" placeholder="🔍 Search bookmarks...">
     </header>
 
     <div class="button-container">
@@ -22,9 +22,13 @@
         <ul id="bookmarkList" class="sortable-list"></ul>
     </section>
 
-    <footer>
-        <button id="toggleView" class="btn-toggle">🌗 Toggle View</button>
+    <!-- 📥 Footer with More Functionality -->
+    <footer style="padding: 10px;">
+        <div class="footer-buttons">
+            <button id="syncBookmarks" class="btn-sync">🔄 Sync Now</button>
+        </div>
         <p>📅 Last Sync: <span id="lastSync">Not Synced</span></p>
+        <p>🚀 Developed by <a href="https://mrriyaj.com" id="developerLink">Mr Riyaj</a></p>
     </footer>
 
     <script src="popup.js"></script>
