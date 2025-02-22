@@ -4,14 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookmark Organizer Settings</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="options.css"> <!-- Linking the new CSS file -->
 </head>
 <body>
-    <h2>Settings</h2>
-    <label>
-        <input type="checkbox" id="syncBookmarks"> Enable Syncing
-    </label>
-    <button id="saveSettings">Save</button>
+    <header>
+        <h2>⚙️ Settings</h2>
+    </header>
+
+    <section class="settings-container">
+        <div class="setting-item">
+            <label>
+                <input type="checkbox" id="syncBookmarks"> Enable Bookmark Syncing
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <label>
+                <input type="checkbox" id="darkModeToggle"> Enable Dark Mode
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <label>
+                <input type="checkbox" id="autoCategorization"> Auto-Categorize Bookmarks
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <button id="exportBookmarks" class="btn-secondary">📤 Export Bookmarks</button>
+            <input type="file" id="importBookmarks" hidden>
+            <button id="importBtn" class="btn-primary">📥 Import Bookmarks</button>
+        </div>
+
+        <div class="setting-item">
+            <label for="folderColor">Select Folder Color:</label>
+            <input type="color" id="folderColor" value="#ff914d">
+        </div>
+
+        <button id="saveSettings" class="btn-save">💾 Save Settings</button>
+    </section>
+
     <script src="options.js"></script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+/* General Styles */
+body {
+    font-family: "Arial", sans-serif;
+    width: 350px;
+    padding: 12px;
+    background: #f4f4f4;
+    color: #333;
+    border-radius: 10px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #2c2c2c;
+    color: #f9f9f9;
+}
+
+/* Header */
+h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #2b2d42;
+}
+
+/* Settings Container */
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+/* Setting Items */
+.setting-item {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .setting-item {
+    background: #3a3a3a;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-save {
+    background: #3a86ff;
+    color: white;
+}
