@@ -1,60 +1,110 @@
 /* General Styles */
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: "Arial", sans-serif;
-    width: 350px;
-    padding: 12px;
-    background: #f4f4f4;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f8f9fa;
     color: #333;
-    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+    overflow: hidden; /* Prevent body scroll */
 }
 
 /* Dark Mode */
 body.dark-mode {
-    background: #2c2c2c;
+    background: #1e1e1e;
     color: #f9f9f9;
 }
 
-/* Header */
-h2 {
-    text-align: center;
-    font-size: 18px;
-    color: #2b2d42;
+/* Layout */
+.container {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100vh - 50px);
+    overflow: hidden;
 }
 
-/* Settings Container */
-.settings-container {
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    padding: 20px;
+    background: white;
+    border-right: 2px solid #ddd;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px;
+    gap: 15px;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #eee;
 }
 
-/* Setting Items */
-.setting-item {
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+body.dark-mode .sidebar {
+    background: #2c2c2c;
 }
 
-body.dark-mode .setting-item {
-    background: #3a3a3a;
+/* Main Content */
+.bookmarks-panel {
+    flex-grow: 1;
+    padding: 20px;
+    background: #fff;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb #eee;
+}
+
+body.dark-mode .bookmarks-panel {
+    background: #262626;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Search Bar */
+#searchBookmarks {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+body.dark-mode #searchBookmarks {
+    background: #333;
+    border: 1px solid #555;
+    color: #fff;
 }
 
 /* Buttons */
 button {
-    width: 100%;
-    padding: 8px;
+    padding: 8px 12px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 
 .btn-primary {
     background: #28a745;
     color: white;
-    font-weight: bold;
 }
 
 .btn-secondary {
@@ -65,4 +115,116 @@ button {
 .btn-save {
     background: #3a86ff;
     color: white;
+}
+
+/* Categories & Bookmarks */
+h3 {
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+/* Folder Styles - Shows First */
+.folder {
+    font-weight: bold;
+    background: #f4e8c1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Bookmark Styles */
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+body.dark-mode .bookmark-item {
+    background: #424242;
+}
+
+/* Bookmark Title - Single Line */
+.bookmark-text {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 10px;
+}
+
+/* Bookmark Favicons */
+.bookmark-item img {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+/* Bookmark Actions */
+.bookmark-item .actions {
+    display: flex;
+    gap: 8px;
+}
+
+.bookmark-item button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.pin-btn {
+    color: #ffbf00;
+}
+
+.pin-btn:hover {
+    transform: scale(1.2);
+}
+
+.delete-btn {
+    color: red;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Footer (Fixed at Bottom) */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+footer a {
+    color: #ff914d;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .bookmarks-panel {
+        padding: 15px;
+    }
 }

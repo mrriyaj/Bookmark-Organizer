@@ -1,82 +1,85 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const syncCheckbox = document.getElementById("syncBookmarks");
+  const allBookmarksContainer = document.getElementById("allBookmarks");
+  const pinnedBookmarksContainer = document.getElementById("pinnedBookmarks");
+  const searchInput = document.getElementById("searchBookmarks");
   const darkModeToggle = document.getElementById("darkModeToggle");
-  const autoCategorization = document.getElementById("autoCategorization");
-  const saveBtn = document.getElementById("saveSettings");
-  const exportBtn = document.getElementById("exportBookmarks");
-  const importBtn = document.getElementById("importBtn");
-  const importFile = document.getElementById("importBookmarks");
-  const folderColorPicker = document.getElementById("folderColor");
 
-  // Load stored settings
-  chrome.storage.sync.get(["syncEnabled", "darkMode", "autoCategorization", "folderColor"], (data) => {
-    syncCheckbox.checked = data.syncEnabled || false;
-    darkModeToggle.checked = data.darkMode || false;
-    autoCategorization.checked = data.autoCategorization || false;
-    folderColorPicker.value = data.folderColor || "#ff914d";
-
-    if (data.darkMode) {
-      document.body.classList.add("dark-mode");
-    }
-  });
-
-  // Save settings
-  saveBtn.addEventListener("click", () => {
-    chrome.storage.sync.set({
-      syncEnabled: syncCheckbox.checked,
-      darkMode: darkModeToggle.checked,
-      autoCategorization: autoCategorization.checked,
-      folderColor: folderColorPicker.value
-    }, () => {
-      alert("✅ Settings saved successfully!");
-    });
-  });
-
-  // Dark Mode Toggle
-  darkModeToggle.addEventListener("change", () => {
-    document.body.classList.toggle("dark-mode", darkModeToggle.checked);
-  });
-
-  // Export Bookmarks
-  exportBtn.addEventListener("click", () => {
+  function loadBookmarks() {
     chrome.bookmarks.getTree((bookmarks) => {
-      const json = JSON.stringify(bookmarks, null, 2);
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "bookmarks_backup.json";
-      a.click();
+      allBookmarksContainer.innerHTML = "";
+      pinnedBookmarksContainer.innerHTML = "";
+      displayBookmarks(bookmarks, allBookmarksContainer);
     });
-  });
+  }
 
-  // Import Bookmarks
-  importBtn.addEventListener("click", () => {
-    importFile.click();
-  });
-
-  importFile.addEventListener("change", (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const importedData = JSON.parse(e.target.result);
-      processImportedBookmarks(importedData);
-    };
-    reader.readAsText(file);
-  });
-
-  // Function to process imported bookmarks
-  function processImportedBookmarks(bookmarks, parentId = "1") {
+  function displayBookmarks(bookmarks, container) {
     bookmarks.forEach((bookmark) => {
       if (bookmark.children) {
-        chrome.bookmarks.create({ parentId, title: bookmark.title }, (newFolder) => {
-          processImportedBookmarks(bookmark.children, newFolder.id);
-        });
+        displayBookmarks(bookmark.children, container);
       } else {
-        chrome.bookmarks.create({ parentId, title: bookmark.title, url: bookmark.url });
+        const li = document.createElement("li");
+        li.classList.add("bookmark-item");
+        li.draggable = true;
+
+        // 🌍 Website Favicon
+        const favicon = document.createElement("img");
+        favicon.src = `https://www.google.com/s2/favicons?sz=32&domain=${bookmark.url}`;
+        favicon.alt = "🔖";
+
+        // 📝 Bookmark Title
+        const text = document.createElement("span");
+        text.textContent = bookmark.title;
+        text.classList.add("bookmark-text");
+
+        // 📌 Pin Button
+        const pinBtn = document.createElement("button");
+        pinBtn.textContent = "📌";
+        pinBtn.classList.add("pin-btn");
+        pinBtn.addEventListener("click", () => {
+          if (container === allBookmarksContainer) {
+            pinnedBookmarksContainer.appendChild(li);
+          } else {
+            allBookmarksContainer.appendChild(li);
+          }
+        });
+
+        // 🗑️ Delete Button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "❌";
+        deleteBtn.classList.add("delete-btn");
+        deleteBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (confirm(`Are you sure you want to delete "${bookmark.title}"?`)) {
+            chrome.bookmarks.remove(bookmark.id, loadBookmarks);
+          }
+        });
+
+        // Append Elements
+        const actions = document.createElement("div");
+        actions.classList.add("actions");
+        actions.appendChild(pinBtn);
+        actions.appendChild(deleteBtn);
+
+        li.appendChild(favicon);
+        li.appendChild(text);
+        li.appendChild(actions);
+        li.dataset.url = bookmark.url;
+
+        // Open Bookmark on Click
+        li.addEventListener("click", () => {
+          chrome.tabs.create({ url: bookmark.url });
+        });
+
+        container.appendChild(li);
       }
     });
   }
+
+  // 🌙 Dark Mode Toggle
+  darkModeToggle.addEventListener("change", () => {
+    document.body.classList.toggle("dark-mode", darkModeToggle.checked);
+    localStorage.setItem("darkMode", darkModeToggle.checked);
+  });
+
+  loadBookmarks();
 });
