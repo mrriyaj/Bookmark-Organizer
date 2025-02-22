@@ -1,48 +1,50 @@
 /* General Styles */
 body {
     font-family: "Arial", sans-serif;
-    width: 350px;
-    padding: 12px;
-    background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+    width: 320px; /* Fixed width to match popup size */
+    max-height: 500px; /* Prevent overflow */
+    padding: 10px;
+    background: #f9f9f9;
     color: #333;
-    border-radius: 10px;
+    border-radius: 8px;
+    overflow-y: auto; /* Enables scrolling when needed */
 }
 
+/* Header */
 h2 {
     text-align: center;
+    font-size: 18px;
     color: #2b2d42;
-    font-size: 20px;
 }
 
 header input {
-    width: 90%;
+    width: 100%;
     padding: 8px;
-    border: none;
-    border-radius: 5px;
-    margin: 10px auto;
-    display: block;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     font-size: 14px;
+    margin-bottom: 8px;
 }
 
 /* Buttons */
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    gap: 5px;
 }
 
 button {
-    padding: 8px;
+    padding: 8px 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    white-space: nowrap;
 }
 
 .btn-primary {
-    background: #2b9348;
+    background: #28a745;
     color: white;
-    font-weight: bold;
 }
 
 .btn-secondary {
@@ -51,7 +53,7 @@ button {
 }
 
 .btn-toggle {
-    background: #577590;
+    background: #3a86ff;
     color: white;
     width: 100%;
     margin-top: 10px;
@@ -61,21 +63,70 @@ button {
 ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-li {
-    padding: 8px;
-    margin: 4px 0;
+/* Folder & Bookmark Styling */
+.folder-title {
+    color: #ff914d;
+    font-weight: bold;
+}
+
+.bookmark-title {
+    color: #3a86ff;
+    font-weight: bold;
+}
+
+/* Folder Style */
+li.folder {
+    background: #ffe5b4;
+    font-weight: bold;
+    padding: 6px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+}
+
+/* Bookmark List */
+li.bookmark {
     background: white;
-    border-radius: 5px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    padding: 6px;
+    margin: 4px 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 10px;
+/* Favicon */
+li.bookmark img {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+}
+
+/* Bookmark Text */
+.bookmark-text {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Small Delete Button */
+.delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.delete-btn img {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+}
+
+.delete-btn:hover img {
+    opacity: 1;
 }

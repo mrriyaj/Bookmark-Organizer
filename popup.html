@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Bookmark Organizer</title>
+    <title>Bookmark Organizer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h2>📌 Bookmark Organizer</h2>
-        <input type="text" id="searchBookmarks" placeholder="🔍 Search bookmarks...">
+        <input type="text" id="searchBookmarks" placeholder="🔍 Search...">
     </header>
 
     <div class="button-container">
-        <button id="addBookmark" class="btn-primary">➕ Add Current Page</button>
+        <button id="addBookmark" class="btn-primary">➕ Add</button>
         <button id="openOptions" class="btn-secondary">⚙️ Settings</button>
     </div>
 
     <section>
-        <h3>📂 Categories</h3>
-        <ul id="categories" class="sortable-list"></ul>
-    </section>
-
-    <section>
-        <h3>🔖 Bookmarks</h3>
+        <h3 class="bookmark-title">🔖 Bookmarks</h3>
         <ul id="bookmarkList" class="sortable-list"></ul>
     </section>
 
